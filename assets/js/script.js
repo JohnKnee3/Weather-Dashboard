@@ -26,3 +26,5 @@
 // Explain the benefits and challenges of working with asynchronous JavaScript
 
 // Explain and implement query string parameters
+
+//6.1.4 fetch() introduction and used dev tool to look at them under Network/repos/header/response.  Vid on Client Server Overview and JSON overview.
