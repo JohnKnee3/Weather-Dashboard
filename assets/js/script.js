@@ -32,3 +32,4 @@
 //6.1.6 passed in a string from the call to the function to create something that can select any user that gets passed in.
 //6.2.3 hardcoded the input form into the HTML using the provided CSS for styling
 //6.2.4 addEventListener was used to call a new function that pulled the value of what was typed and send it to the next function.
+//6.2.5 pretty dense stuff all surrounding creating elements from all of the parsed JSON data and grabbing the sepcific data you need from each step of the array using a for loop.
