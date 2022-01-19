@@ -29,3 +29,4 @@
 
 //6.1.4 fetch() introduction and used dev tool to look at them under Network/repos/header/response.  Vid on Client Server Overview and JSON overview.
 //6.1.5 .then to do something with what has been fetched and use .json to convert things into JSON so Javascript can use it.
+//6.1.6 passed in a string from the call to the function to create something that can select any user that gets passed in.
