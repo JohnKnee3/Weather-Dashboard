@@ -35,3 +35,4 @@
 //6.2.5 pretty dense stuff all surrounding creating elements from all of the parsed JSON data and grabbing the sepcific data you need from each step of the array using a for loop.
 //6.2.6 if/else on the fetch to see if valid input.  .catch to show connection errors.
 //6.3.3 Added a new HTML and JS for that page.  Shares the same CSS.
+//6.3.4 Zero'd in on the issues page for this fetch and used ? in the URL to change the order of the info.
