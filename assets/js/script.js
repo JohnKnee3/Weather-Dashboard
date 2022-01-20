@@ -39,3 +39,4 @@
 //6.3.5 Took the issues we received and created a list of links using <a> and href and _blank.
 //6.3.6 checked Header from the fetch to see if it contained a "link" then made another <a> link in js
 //6.4.3 Query parameters specifically GitHubs ?repo=JohnKnee3/git-it-done.
+//6.4.4 Introduced to document.location  and grabbed it's .search and was introduced to .split.
