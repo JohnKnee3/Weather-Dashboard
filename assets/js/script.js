@@ -7,12 +7,13 @@ var formSubmitHandler = function (event) {
     event.preventDefault();
 
     // get value from input element
-    var cityname = cityInputEl.value.trim();
+    var cityName = cityInputEl.value.trim();
 
 
-    if (cityname) {
-        getCityWeather(cityname);
-
+    if (cityName) {
+        getCityWeather(cityName);
+        //clears the input field
+        cityInputEl.value = "";
     }
     else {
         alert("Please enter a valid city");
@@ -21,15 +22,25 @@ var formSubmitHandler = function (event) {
 
 //goes to the api to get the city's weather
 var getCityWeather = function (city) {
-    // var apiUrl = "https://api.github.com/users/" + city + "/repos";
     console.log(city);
+    // var apiUrl = "https://api.github.com/users/" + city + "/repos";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=b66533483256f366bcceb78a532dba20";
 
     // make a get request to url
     fetch(apiUrl)
         .then(function (response) {
-            console.log(response);
-        })
+            // request was successful
+            if (response.ok) {
+                console.log(response);
+                response.json().then(function (data) {
+                    console.log(data);
+                    // displayWeather(data);
+                });
+            } else {
+                alert("Error: " + response.statusText);
+            }
 
+        })
 };
 
 //listens if the city form has been clicked
