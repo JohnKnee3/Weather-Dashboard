@@ -1,3 +1,20 @@
+var cityFormEl = document.querySelector("#city-form");
+var cityInputEl = document.querySelector("#city-name");
+
+
+var formSubmitHandler = function (event) {
+    // prevent page from refreshing
+    event.preventDefault();
+
+    // get value from input element
+    var username = cityInputEl.value.trim();
+    console.log(username);
+};
+
+//listens if the city form has been clicked
+cityFormEl.addEventListener("submit", formSubmitHandler);
+
+
 //Notes----------------------------------------------------
 
 //LOOKIN AHEAD
