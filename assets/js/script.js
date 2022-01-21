@@ -44,3 +44,4 @@
 //6.5.3 pretty dense stuff about using a var to apply a name, adding multiple parameters and how to check your fetch in the Network/Preview tab.
 //6.5.4 used fetch again to grab specific Javascript repos and passed data.items this time into the array because that was the name of it.
 //6.5.5 created buttons in the HTML set up to reference things based on data-language="javascript" etc...
+//6.5.6 used add event listener and .target to get the data-language specific button presses with the div that holds all the buttons.
