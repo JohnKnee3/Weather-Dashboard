@@ -42,3 +42,4 @@
 //6.4.4 Introduced to document.location  and grabbed it's .search and was introduced to .split.
 //6.4.5 document.location.replace(."index.html"); can be added to return users to the main page.  Added as failsafes if when don't get certain expected info.
 //6.5.3 pretty dense stuff about using a var to apply a name, adding multiple parameters and how to check your fetch in the Network/Preview tab.
+//6.5.4 used fetch again to grab specific Javascript repos and passed data.items this time into the array because that was the name of it.
