@@ -112,6 +112,11 @@ p {
   box-shadow: 6px 5px var(--light-dark);
 }
 
+.today-box{
+    margin: 0 0 20px 0;
+    border-bottom: 3px solid var(--dark);
+}
+
 .list-group {
   padding: 0;
   list-style: none;
@@ -155,6 +160,7 @@ p {
     padding: 0 18px;
     border-radius: 6px;
     margin-bottom: 1.0%;
+    box-shadow: 3px 3px var(--dark);
   }
 
   .future-item {
@@ -166,6 +172,8 @@ p {
     color: var(--primary);
     text-decoration: none;
   }
+
+  
 
 .status-icon {
   padding: 2px 5px;
