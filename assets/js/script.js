@@ -7,8 +7,29 @@ var formSubmitHandler = function (event) {
     event.preventDefault();
 
     // get value from input element
-    var username = cityInputEl.value.trim();
-    console.log(username);
+    var cityname = cityInputEl.value.trim();
+
+
+    if (cityname) {
+        getCityWeather(cityname);
+
+    }
+    else {
+        alert("Please enter a valid city");
+    }
+};
+
+//goes to the api to get the city's weather
+var getCityWeather = function (city) {
+    // var apiUrl = "https://api.github.com/users/" + city + "/repos";
+    console.log(city);
+
+    // make a get request to url
+    fetch(apiUrl)
+        .then(function (response) {
+            console.log(response);
+        })
+
 };
 
 //listens if the city form has been clicked
