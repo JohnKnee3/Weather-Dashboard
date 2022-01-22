@@ -1,5 +1,6 @@
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#city-name");
+var citySearchTerm = document.querySelector("#city-search-term");
 
 
 var formSubmitHandler = function (event) {
@@ -20,20 +21,20 @@ var formSubmitHandler = function (event) {
     }
 };
 
-//goes to the api to get the city's weather
+//goes to the api to get the city's weather by City Name
 var getCityWeather = function (city) {
     console.log(city);
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
-    // var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,minutely&units=imperial&appid=b66533483256f366bcceb78a532dba20"
 
     // make a get request to url
     fetch(apiUrl)
         .then(function (response) {
             // request was successful
             if (response.ok) {
-                console.log(response);
+                // console.log(response);
                 response.json().then(function (data) {
-                    console.log(data);
+                    // console.log(data);
+                    displayCurrentNameDate(data.name, data.dt);
                     oneCallWeather(data.coord.lat, data.coord.lon);
                 });
 
@@ -44,6 +45,7 @@ var getCityWeather = function (city) {
         })
 };
 
+//goes to the api to get more weather info by Lat and Long
 var oneCallWeather = function (lat, lon) {
     console.log(lat, lon);
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=imperial&appid=b66533483256f366bcceb78a532dba20"
@@ -53,9 +55,9 @@ var oneCallWeather = function (lat, lon) {
         .then(function (response) {
             // request was successful
             if (response.ok) {
-                console.log(response);
+                // console.log(response);
                 response.json().then(function (data) {
-                    console.log(data);
+                    // console.log(data);
                     // displayWeather(data);
                 });
 
@@ -64,6 +66,23 @@ var oneCallWeather = function (lat, lon) {
             }
 
         })
+};
+
+//displays the current days city name and date
+var displayCurrentNameDate = function (name, dateScramble) {
+    //gets current day by converting the dt into something I want to see
+    var date = new Date(dateScramble * 1000);
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getUTCFullYear();
+    var currentDay = "(" + month + "/" + day + "/" + year + ")";
+    // console.log(currentDay);
+
+    //City's name plus date attached
+    var cityTime = name + currentDay;
+    console.log(cityTime);
+
+    citySearchTerm.textContent = cityTime;
 
 };
 
@@ -71,6 +90,24 @@ var oneCallWeather = function (lat, lon) {
 
 //listens if the city form has been clicked
 cityFormEl.addEventListener("submit", formSubmitHandler);
+
+
+
+//THE DATE EXPERIMENT
+// var date = new Date(1642871441 * 1000);
+// console.log(date);
+
+// var month = date.getMonth() + 1;
+// console.log(month);
+
+// var day = date.getDate();
+// console.log(day);
+
+// var year = date.getUTCFullYear();
+// console.log(year);
+
+// var currentDay = month + "/" + day + "/" + year;
+// console.log(currentDay);
 
 
 //Notes----------------------------------------------------
