@@ -1,6 +1,11 @@
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#city-name");
 var citySearchTerm = document.querySelector("#city-search-term");
+var currentTempEl = document.querySelector("#current-temp");
+var currentWindEl = document.querySelector("#current-wind");
+var currentHumidityEl = document.querySelector("#current-humidity");
+var currentUviEl = document.querySelector("#current-uvi");
+
 
 
 var formSubmitHandler = function (event) {
@@ -23,7 +28,6 @@ var formSubmitHandler = function (event) {
 
 //goes to the api to get the city's weather by City Name
 var getCityWeather = function (city) {
-    console.log(city);
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
 
     // make a get request to url
@@ -47,7 +51,6 @@ var getCityWeather = function (city) {
 
 //goes to the api to get more weather info by Lat and Long
 var oneCallWeather = function (lat, lon) {
-    console.log(lat, lon);
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=imperial&appid=b66533483256f366bcceb78a532dba20"
 
     // make a get request to url
@@ -57,8 +60,8 @@ var oneCallWeather = function (lat, lon) {
             if (response.ok) {
                 // console.log(response);
                 response.json().then(function (data) {
-                    // console.log(data);
-                    // displayWeather(data);
+                    // console.log(data.current.uvi);
+                    displayCurrentWeather(data.current.temp, data.current.wind_speed, data.current.humidity, data.current.uvi);
                 });
 
             } else {
@@ -76,14 +79,36 @@ var displayCurrentNameDate = function (name, dateScramble) {
     var day = date.getDate();
     var year = date.getUTCFullYear();
     var currentDay = "(" + month + "/" + day + "/" + year + ")";
-    // console.log(currentDay);
-
+    
     //City's name plus date attached
     var cityTime = name + currentDay;
-    console.log(cityTime);
-
+    
+    //changes the text content of the top to display the city and current day
     citySearchTerm.textContent = cityTime;
 
+};
+
+//displays the information for the current days weather
+var displayCurrentWeather = function(temp, wind, humidity, uvi) {
+    console.log(temp, wind, humidity, uvi);
+    
+    //displays the current temp on the HTML
+    fancyTemp = temp + "°F";
+    currentTempEl.textContent = fancyTemp;
+
+    //displays the current wind speed on the HTML
+    fancyWind = wind + "MPH";
+    currentWindEl.textContent = fancyWind;
+
+    //displays the current humidity
+    fancyHumidity = humidity + "%";
+    currentHumidityEl.textContent = fancyHumidity;
+
+    //displays the current UV index
+    currentUviEl.removeAttribute("class");
+    currentUviEl.classList.add("uv-item-yellow");
+    currentUviEl.textContent = uvi;
+    
 };
 
 
