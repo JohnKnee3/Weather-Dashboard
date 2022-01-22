@@ -24,6 +24,7 @@ var formSubmitHandler = function (event) {
 var getCityWeather = function (city) {
     console.log(city);
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
+    // var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,minutely&units=imperial&appid=b66533483256f366bcceb78a532dba20"
     
     // make a get request to url
     fetch(apiUrl)
@@ -33,6 +34,7 @@ var getCityWeather = function (city) {
                 console.log(response);
                 response.json().then(function (data) {
                     console.log(data);
+                    console.log(data.current.temp)
                     // displayWeather(data);
                 });
             } else {
@@ -41,6 +43,8 @@ var getCityWeather = function (city) {
 
         })
 };
+
+
 
 //listens if the city form has been clicked
 cityFormEl.addEventListener("submit", formSubmitHandler);
