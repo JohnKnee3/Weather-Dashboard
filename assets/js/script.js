@@ -5,6 +5,7 @@ var currentTempEl = document.querySelector("#current-temp");
 var currentWindEl = document.querySelector("#current-wind");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentUviEl = document.querySelector("#current-uvi");
+var hTest = document.querySelector("#h-test");
 
 
 
@@ -38,7 +39,8 @@ var getCityWeather = function (city) {
                 // console.log(response);
                 response.json().then(function (data) {
                     // console.log(data);
-                    displayCurrentNameDate(data.name, data.dt);
+                    displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
+                    // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
                 });
 
@@ -72,26 +74,32 @@ var oneCallWeather = function (lat, lon) {
 };
 
 //displays the current days city name and date
-var displayCurrentNameDate = function (name, dateScramble) {
+var displayCurrentNameDate = function (name, dateScramble, icon) {
+    console.log(icon);
     //gets current day by converting the dt into something I want to see
     var date = new Date(dateScramble * 1000);
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var year = date.getUTCFullYear();
     var currentDay = "(" + month + "/" + day + "/" + year + ")";
-    
+
     //City's name plus date attached
     var cityTime = name + currentDay;
-    
+
     //changes the text content of the top to display the city and current day
     citySearchTerm.textContent = cityTime;
 
+    //display icon next to text
+    var iconShow = document.createElement("span");
+    iconShow.setAttribute("class", icon);
+    console.log(iconShow);
+    hTest.appendChild(iconShow);
 };
 
 //displays the information for the current days weather
-var displayCurrentWeather = function(temp, wind, humidity, uvi) {
+var displayCurrentWeather = function (temp, wind, humidity, uvi) {
     console.log(temp, wind, humidity, uvi);
-    
+
     //displays the current temp on the HTML
     fancyTemp = temp + "°F";
     currentTempEl.textContent = fancyTemp;
@@ -104,11 +112,21 @@ var displayCurrentWeather = function(temp, wind, humidity, uvi) {
     fancyHumidity = humidity + "%";
     currentHumidityEl.textContent = fancyHumidity;
 
-    //displays the current UV index
-    currentUviEl.removeAttribute("class");
-    currentUviEl.classList.add("uv-item-yellow");
+    //displays the current UV Index
     currentUviEl.textContent = uvi;
-    
+    //styles the UV box
+    currentUviEl.removeAttribute("class");
+    //if favorable display green
+    if (uvi <= 2.99) {
+        currentUviEl.classList.add("uv-item-green");
+    }
+    //if moderate displat yellow
+    else if (uvi <= 5.99 && uvi >= 3) {
+        currentUviEl.classList.add("uv-item-yellow");
+    }
+    //if anthing higher display orange
+    else 
+        currentUviEl.classList.add("uv-item-orange");
 };
 
 
