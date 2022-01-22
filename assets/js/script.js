@@ -23,9 +23,8 @@ var formSubmitHandler = function (event) {
 //goes to the api to get the city's weather
 var getCityWeather = function (city) {
     console.log(city);
-    // var apiUrl = "https://api.github.com/users/" + city + "/repos";
-    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=b66533483256f366bcceb78a532dba20";
-
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
+    
     // make a get request to url
     fetch(apiUrl)
         .then(function (response) {
@@ -37,7 +36,7 @@ var getCityWeather = function (city) {
                     // displayWeather(data);
                 });
             } else {
-                alert("Error: " + response.statusText);
+                alert("Error: City " + response.statusText + ". Please enter valid input.");
             }
 
         })
