@@ -5,7 +5,7 @@ var currentTempEl = document.querySelector("#current-temp");
 var currentWindEl = document.querySelector("#current-wind");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentUviEl = document.querySelector("#current-uvi");
-var hTest = document.querySelector("#h-test");
+var currentIconEl = document.querySelector("#current-icon");
 
 
 
@@ -21,6 +21,7 @@ var formSubmitHandler = function (event) {
         getCityWeather(cityName);
         //clears the input field
         cityInputEl.value = "";
+        currentIconEl.textContent = "";
     }
     else {
         alert("Please enter a valid city");
@@ -90,10 +91,13 @@ var displayCurrentNameDate = function (name, dateScramble, icon) {
     citySearchTerm.textContent = cityTime;
 
     //display icon next to text
-    var iconShow = document.createElement("span");
-    iconShow.setAttribute("class", icon);
-    console.log(iconShow);
-    hTest.appendChild(iconShow);
+    //first make a url
+    var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+    
+    //creates an img element to add to the html
+    var iconShow = document.createElement("img");
+    iconShow.setAttribute("src", iconUrl);
+    citySearchTerm.appendChild(iconShow);
 };
 
 //displays the information for the current days weather
