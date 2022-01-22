@@ -25,7 +25,7 @@ var getCityWeather = function (city) {
     console.log(city);
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
     // var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,minutely&units=imperial&appid=b66533483256f366bcceb78a532dba20"
-    
+
     // make a get request to url
     fetch(apiUrl)
         .then(function (response) {
@@ -34,14 +34,37 @@ var getCityWeather = function (city) {
                 console.log(response);
                 response.json().then(function (data) {
                     console.log(data);
-                    console.log(data.current.temp)
-                    // displayWeather(data);
+                    oneCallWeather(data.coord.lat, data.coord.lon);
                 });
+
             } else {
                 alert("Error: City " + response.statusText + ". Please enter valid input.");
             }
 
         })
+};
+
+var oneCallWeather = function (lat, lon) {
+    console.log(lat, lon);
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=imperial&appid=b66533483256f366bcceb78a532dba20"
+
+    // make a get request to url
+    fetch(apiUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                console.log(response);
+                response.json().then(function (data) {
+                    console.log(data);
+                    // displayWeather(data);
+                });
+
+            } else {
+                alert("Error: City " + response.statusText + ". Please enter valid input.");
+            }
+
+        })
+
 };
 
 
