@@ -7,6 +7,7 @@ var currentHumidityEl = document.querySelector("#current-humidity");
 var currentUviEl = document.querySelector("#current-uvi");
 var currentIconEl = document.querySelector("#current-icon");
 var forecastContainerEl = document.querySelector("#forecast-container");
+var historyContainerEl = document.querySelector("#history-container");
 
 
 
@@ -20,6 +21,7 @@ var formSubmitHandler = function (event) {
 
     if (cityName) {
         getCityWeather(cityName);
+        // displayHistoryButton(cityName);
         //clears the input field
         cityInputEl.value = "";
         forecastContainerEl.textContent = "";
@@ -43,8 +45,10 @@ var getCityWeather = function (city) {
                 response.json().then(function (data) {
                     // console.log(data);
                     displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
+                    displayHistoryButton(data.name);
                     // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
+                    
                 });
 
             } else {
@@ -182,6 +186,19 @@ var displayFiveDay = function (data) {
         //appends the enitre element to the HTML
         forecastContainerEl.appendChild(fiveWeatherEl);
     }
+};
+
+var displayHistoryButton = function (city) {
+    console.log(city);
+
+    //display city button
+    var cityEl = document.createElement("button");
+    cityEl.setAttribute("data-city", city);
+    cityEl.classList = "btn";
+    cityEl.textContent = city;
+    console.log(cityEl);
+
+    historyContainerEl.appendChild(cityEl);
 };
 
 
