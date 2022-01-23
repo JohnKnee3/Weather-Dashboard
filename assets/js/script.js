@@ -48,7 +48,6 @@ var getCityWeather = function (city) {
                     displayHistoryButton(data.name);
                     // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
-
                 });
 
             } else {
@@ -73,7 +72,6 @@ var getFeaturedCityWeather = function (city) {
                     displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
                     // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
-
                 });
 
             } else {
