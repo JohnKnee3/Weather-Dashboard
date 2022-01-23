@@ -6,6 +6,7 @@ var currentWindEl = document.querySelector("#current-wind");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentUviEl = document.querySelector("#current-uvi");
 var currentIconEl = document.querySelector("#current-icon");
+var forecastContainerEl = document.querySelector("#forecast-container");
 
 
 
@@ -21,7 +22,8 @@ var formSubmitHandler = function (event) {
         getCityWeather(cityName);
         //clears the input field
         cityInputEl.value = "";
-        // currentIconEl.textContent = "";
+        forecastContainerEl.textContent = "";
+        
     }
     else {
         alert("Please enter a valid city");
@@ -134,10 +136,43 @@ var displayCurrentWeather = function (temp, wind, humidity, uvi) {
 
 //displays the 5 day forecast
 var displayFiveDay = function(data) {
+    console.log(data);
     for (var i = 1; i < 6; i++) {
-    console.log(data[i]);
+    var dateScramble = (data[i].dt);
+    var date = new Date(dateScramble * 1000);
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getUTCFullYear();
+    var currentDay = month + "/" + day + "/" + year;
+    console.log(currentDay);
+    console.log(data[i].weather[0].icon);
+    var iconUrl = "http://openweathermap.org/img/w/" + data[i].weather[0].icon + ".png";
+    console.log(data[i].temp.day);
+    console.log(data[i].wind_speed);
+    console.log(data[i].humidity);
+    
+    //create div to store a single day's weather
+    var fiveWeatherEl = document.createElement("div");
+    fiveWeatherEl.classList = "future-box col-12 col-md-6 col-lg-2";
+
+    //add current day text
+    var dayEl = document.createElement("h4");
+    dayEl.classList = "future-item";
+    dayEl.textContent = currentDay;
+    fiveWeatherEl.appendChild(dayEl);
+
+    //display icon
+    var iconEl = document.createElement("img");
+    iconEl.setAttribute("src", iconUrl);
+    fiveWeatherEl.appendChild(iconEl);
+
+
+    console.log(fiveWeatherEl);
+    forecastContainerEl.appendChild(fiveWeatherEl);
     
     }
+
+    
 };
 
 
