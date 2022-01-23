@@ -9,8 +9,30 @@ var currentIconEl = document.querySelector("#current-icon");
 var forecastContainerEl = document.querySelector("#forecast-container");
 var historyContainerEl = document.querySelector("#history-container");
 
+//variable I want to save cities into
+var tasks = [];
 
+//saves the tasks variable to the local storage
+var saveTasks = function () {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+};
 
+//gets items from local storage
+var loadTasks = function () {
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+    console.log(tasks);
+
+    //local storage is empty this creates an empty array
+    if (!tasks) {
+        tasks = [];
+    }
+    //grabs each item in the array and sends it to my button maker
+    for (var i = 0; i < tasks.length; i++) {
+        displayHistoryButton(tasks[i]);
+    }
+
+};
+//take the types in info
 var formSubmitHandler = function (event) {
     // prevent page from refreshing
     event.preventDefault();
@@ -46,6 +68,9 @@ var getCityWeather = function (city) {
                     // console.log(data);
                     displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
                     displayHistoryButton(data.name);
+                    tasks.push(data.name);
+                    // console.log(tasks);
+                    saveTasks();
                     // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
                 });
@@ -237,10 +262,10 @@ var buttonClickHandler = function (event) {
 };
 
 
-
+loadTasks();
 //listens if the city form has been clicked
 cityFormEl.addEventListener("submit", formSubmitHandler);
-
+//listen to see if a city history button has been clicked
 historyContainerEl.addEventListener("click", buttonClickHandler);
 
 
