@@ -21,7 +21,7 @@ var formSubmitHandler = function (event) {
         getCityWeather(cityName);
         //clears the input field
         cityInputEl.value = "";
-        currentIconEl.textContent = "";
+        // currentIconEl.textContent = "";
     }
     else {
         alert("Please enter a valid city");
@@ -65,6 +65,7 @@ var oneCallWeather = function (lat, lon) {
                 response.json().then(function (data) {
                     // console.log(data.current.uvi);
                     displayCurrentWeather(data.current.temp, data.current.wind_speed, data.current.humidity, data.current.uvi);
+                    displayFiveDay(data.daily);
                 });
 
             } else {
@@ -95,9 +96,7 @@ var displayCurrentNameDate = function (name, dateScramble, icon) {
     var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
     
     //creates an img element to add to the html
-    var iconShow = document.createElement("img");
-    iconShow.setAttribute("src", iconUrl);
-    citySearchTerm.appendChild(iconShow);
+    currentIconEl.setAttribute("src", iconUrl);
 };
 
 //displays the information for the current days weather
@@ -133,12 +132,22 @@ var displayCurrentWeather = function (temp, wind, humidity, uvi) {
         currentUviEl.classList.add("uv-item-orange");
 };
 
+//displays the 5 day forecast
+var displayFiveDay = function(data) {
+    for (var i = 1; i < 6; i++) {
+    console.log(data[i]);
+    
+    }
+};
+
 
 
 //listens if the city form has been clicked
 cityFormEl.addEventListener("submit", formSubmitHandler);
 
 
+console.log(new Date(1642957200 * 1000));
+console.log(new Date(1643043600 * 1000));
 
 //THE DATE EXPERIMENT
 // var date = new Date(1642871441 * 1000);
