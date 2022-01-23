@@ -23,7 +23,7 @@ var formSubmitHandler = function (event) {
         //clears the input field
         cityInputEl.value = "";
         forecastContainerEl.textContent = "";
-        
+
     }
     else {
         alert("Please enter a valid city");
@@ -96,7 +96,7 @@ var displayCurrentNameDate = function (name, dateScramble, icon) {
     //display icon next to text
     //first make a url
     var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-    
+
     //creates an img element to add to the html
     currentIconEl.setAttribute("src", iconUrl);
 };
@@ -130,49 +130,66 @@ var displayCurrentWeather = function (temp, wind, humidity, uvi) {
         currentUviEl.classList.add("uv-item-yellow");
     }
     //if anthing higher display orange
-    else 
+    else
         currentUviEl.classList.add("uv-item-orange");
 };
 
 //displays the 5 day forecast
-var displayFiveDay = function(data) {
+var displayFiveDay = function (data) {
     console.log(data);
     for (var i = 1; i < 6; i++) {
-    var dateScramble = (data[i].dt);
-    var date = new Date(dateScramble * 1000);
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var year = date.getUTCFullYear();
-    var currentDay = month + "/" + day + "/" + year;
-    console.log(currentDay);
-    console.log(data[i].weather[0].icon);
-    var iconUrl = "http://openweathermap.org/img/w/" + data[i].weather[0].icon + ".png";
-    console.log(data[i].temp.day);
-    console.log(data[i].wind_speed);
-    console.log(data[i].humidity);
-    
-    //create div to store a single day's weather
-    var fiveWeatherEl = document.createElement("div");
-    fiveWeatherEl.classList = "future-box col-12 col-md-6 col-lg-2";
+        var dateScramble = (data[i].dt);
+        var date = new Date(dateScramble * 1000);
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var year = date.getUTCFullYear();
+        var currentDay = month + "/" + day + "/" + year;
+        console.log(currentDay);
+        console.log(data[i].weather[0].icon);
+        var iconUrl = "http://openweathermap.org/img/w/" + data[i].weather[0].icon + ".png";
+        console.log(data[i].temp.day);
+        console.log(data[i].wind_speed);
+        console.log(data[i].humidity);
 
-    //add current day text
-    var dayEl = document.createElement("h4");
-    dayEl.classList = "future-item";
-    dayEl.textContent = currentDay;
-    fiveWeatherEl.appendChild(dayEl);
+        //create div to store a single day's weather
+        var fiveWeatherEl = document.createElement("div");
+        fiveWeatherEl.classList = "future-box col-12 col-md-6 col-lg-2";
 
-    //display icon
-    var iconEl = document.createElement("img");
-    iconEl.setAttribute("src", iconUrl);
-    fiveWeatherEl.appendChild(iconEl);
+        //add current day text
+        var dayEl = document.createElement("h4");
+        dayEl.classList = "future-item";
+        dayEl.textContent = currentDay;
+        fiveWeatherEl.appendChild(dayEl);
 
+        //display icon
+        var iconEl = document.createElement("img");
+        iconEl.setAttribute("src", iconUrl);
+        fiveWeatherEl.appendChild(iconEl);
 
-    console.log(fiveWeatherEl);
-    forecastContainerEl.appendChild(fiveWeatherEl);
-    
+        //displays temp
+        var tempEl = document.createElement("h5");
+        tempEl.classList = "future-item";
+        tempEl.textContent = "Temp: " + (data[i].temp.day) + "°F";
+        fiveWeatherEl.appendChild(tempEl);
+
+        //displays wind speed
+        var windEl = document.createElement("h5");
+        windEl.classList = "future-item";
+        windEl.textContent = "Wind: " + (data[i].wind_speed) + " MPH";
+        fiveWeatherEl.appendChild(windEl);
+
+        //displays humidity
+        var humidityEl = document.createElement("h5");
+        humidityEl.classList = "future-item";
+        humidityEl.textContent = "Humidity: " + (data[i].humidity) + "%";
+        fiveWeatherEl.appendChild(humidityEl);
+
+        console.log(fiveWeatherEl);
+        forecastContainerEl.appendChild(fiveWeatherEl);
+
     }
 
-    
+
 };
 
 
