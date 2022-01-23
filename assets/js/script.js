@@ -32,7 +32,7 @@ var formSubmitHandler = function (event) {
     }
 };
 
-//goes to the api to get the city's weather by City Name
+//goes to the api to get the city's weather by City Name and adds to the history.
 var getCityWeather = function (city) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
 
@@ -48,7 +48,32 @@ var getCityWeather = function (city) {
                     displayHistoryButton(data.name);
                     // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
-                    
+
+                });
+
+            } else {
+                alert("Error: City " + response.statusText + ". Please enter valid input.");
+            }
+
+        })
+};
+
+//gets city weather by city name when clicked from history.  Does not add to history.
+var getFeaturedCityWeather = function (city) {
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b66533483256f366bcceb78a532dba20";
+
+    // make a get request to url
+    fetch(apiUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                // console.log(response);
+                response.json().then(function (data) {
+                    // console.log(data);
+                    displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
+                    // console.log(data.weather[0].icon);
+                    oneCallWeather(data.coord.lat, data.coord.lon);
+
                 });
 
             } else {
@@ -188,23 +213,37 @@ var displayFiveDay = function (data) {
     }
 };
 
+//displays the city button to the History Box
 var displayHistoryButton = function (city) {
-    console.log(city);
 
-    //display city button
+    //creates the city button
     var cityEl = document.createElement("button");
     cityEl.setAttribute("data-city", city);
     cityEl.classList = "btn";
     cityEl.textContent = city;
-    console.log(cityEl);
 
+    //add the button to the HTML
     historyContainerEl.appendChild(cityEl);
+};
+
+var buttonClickHandler = function (event) {
+    // get the language attribute from the clicked element
+    var city = event.target.getAttribute("data-city");
+
+    if (city) {
+        getFeaturedCityWeather(city);
+
+        // clear old content
+        forecastContainerEl.textContent = "";
+    }
 };
 
 
 
 //listens if the city form has been clicked
 cityFormEl.addEventListener("submit", formSubmitHandler);
+
+historyContainerEl.addEventListener("click", buttonClickHandler);
 
 
 
