@@ -65,6 +65,7 @@ var oneCallWeather = function (lat, lon) {
             if (response.ok) {
                 // console.log(response);
                 response.json().then(function (data) {
+                    // console.log(data);
                     // console.log(data.current.uvi);
                     displayCurrentWeather(data.current.temp, data.current.wind_speed, data.current.humidity, data.current.uvi);
                     displayFiveDay(data.daily);
@@ -79,7 +80,7 @@ var oneCallWeather = function (lat, lon) {
 
 //displays the current days city name and date
 var displayCurrentNameDate = function (name, dateScramble, icon) {
-    console.log(icon);
+
     //gets current day by converting the dt into something I want to see
     var date = new Date(dateScramble * 1000);
     var month = date.getMonth() + 1;
@@ -103,7 +104,6 @@ var displayCurrentNameDate = function (name, dateScramble, icon) {
 
 //displays the information for the current days weather
 var displayCurrentWeather = function (temp, wind, humidity, uvi) {
-    console.log(temp, wind, humidity, uvi);
 
     //displays the current temp on the HTML
     fancyTemp = temp + "°F";
@@ -125,7 +125,7 @@ var displayCurrentWeather = function (temp, wind, humidity, uvi) {
     if (uvi <= 2.99) {
         currentUviEl.classList.add("uv-item-green");
     }
-    //if moderate displat yellow
+    //if moderate display yellow
     else if (uvi <= 5.99 && uvi >= 3) {
         currentUviEl.classList.add("uv-item-yellow");
     }
@@ -136,7 +136,6 @@ var displayCurrentWeather = function (temp, wind, humidity, uvi) {
 
 //displays the 5 day forecast
 var displayFiveDay = function (data) {
-    console.log(data);
     for (var i = 1; i < 6; i++) {
         var dateScramble = (data[i].dt);
         var date = new Date(dateScramble * 1000);
@@ -144,12 +143,8 @@ var displayFiveDay = function (data) {
         var day = date.getDate();
         var year = date.getUTCFullYear();
         var currentDay = month + "/" + day + "/" + year;
-        console.log(currentDay);
-        console.log(data[i].weather[0].icon);
         var iconUrl = "http://openweathermap.org/img/w/" + data[i].weather[0].icon + ".png";
-        console.log(data[i].temp.day);
-        console.log(data[i].wind_speed);
-        console.log(data[i].humidity);
+
 
         //create div to store a single day's weather
         var fiveWeatherEl = document.createElement("div");
@@ -184,12 +179,9 @@ var displayFiveDay = function (data) {
         humidityEl.textContent = "Humidity: " + (data[i].humidity) + "%";
         fiveWeatherEl.appendChild(humidityEl);
 
-        console.log(fiveWeatherEl);
+        //appends the enitre element to the HTML
         forecastContainerEl.appendChild(fiveWeatherEl);
-
     }
-
-
 };
 
 
@@ -198,8 +190,6 @@ var displayFiveDay = function (data) {
 cityFormEl.addEventListener("submit", formSubmitHandler);
 
 
-console.log(new Date(1642957200 * 1000));
-console.log(new Date(1643043600 * 1000));
 
 //THE DATE EXPERIMENT
 // var date = new Date(1642871441 * 1000);
