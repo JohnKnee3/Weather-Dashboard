@@ -202,7 +202,7 @@ var displayFiveDay = function (data) {
         var fiveWeatherEl = document.createElement("div");
         fiveWeatherEl.classList = "future-box col-12 col-md-6 col-lg-2";
 
-        //add current day text
+        //add current date
         var dayEl = document.createElement("h4");
         dayEl.classList = "future-item";
         dayEl.textContent = currentDay;
