@@ -20,7 +20,7 @@ var saveTasks = function () {
 //gets items from local storage
 var loadTasks = function () {
     tasks = JSON.parse(localStorage.getItem("tasks"));
-    console.log(tasks);
+    // console.log(tasks);
 
     //local storage is empty this creates an empty array
     if (!tasks) {
@@ -65,6 +65,13 @@ var getCityWeather = function (city) {
             if (response.ok) {
                 // console.log(response);
                 response.json().then(function (data) {
+                    for (var i = 0; i < tasks.length; i++) {
+                        if (city === tasks[i]) {
+                            console.log(city);
+                            getFeaturedCityWeather(city);
+                            return;
+                        }
+                    }
                     // console.log(data);
                     displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
                     displayHistoryButton(data.name);
