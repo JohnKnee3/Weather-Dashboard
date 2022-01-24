@@ -10,4 +10,4 @@ This go around we learned about how to grab data from other websites and display
 
 <img src="assets/images/weatherDashboardPreview.jpg" alt="Brief snip of the full webpage">
 
-https://github.com/JohnKnee3/Weather-Dashboard
+https://johnknee3.github.io/Weather-Dashboard/
