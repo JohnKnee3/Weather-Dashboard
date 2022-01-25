@@ -65,8 +65,9 @@ var getCityWeather = function (city) {
             if (response.ok) {
                 // console.log(response);
                 response.json().then(function (data) {
+                    // console.log(data.name);
                     for (var i = 0; i < tasks.length; i++) {
-                        if (city === tasks[i]) {
+                        if (data.name === tasks[i]) {
                             console.log(city);
                             getFeaturedCityWeather(city);
                             return;
