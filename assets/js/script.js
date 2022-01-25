@@ -42,20 +42,7 @@ var formSubmitHandler = function (event) {
 
 
     if (cityName) {
-        var city = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-        console.log(city);
-        // for (var i = 0; i < tasks.length; i++) {
-        //     if (city === tasks[i]) {
-        //         console.log(city);
-        //         getFeaturedCityWeather(city);
-        //         return;
-        //     }
-        // }
-
-        tasks.push(city);
-        //             // console.log(tasks);
-                    saveTasks();
-        getCityWeather(city);
+        getCityWeather(cityName);
         // displayHistoryButton(cityName);
         //clears the input field
         cityInputEl.value = "";
@@ -78,10 +65,19 @@ var getCityWeather = function (city) {
             if (response.ok) {
                 // console.log(response);
                 response.json().then(function (data) {
+                    for (var i = 0; i < tasks.length; i++) {
+                        if (city === tasks[i]) {
+                            console.log(city);
+                            getFeaturedCityWeather(city);
+                            return;
+                        }
+                    }
                     // console.log(data);
                     displayCurrentNameDate(data.name, data.dt, data.weather[0].icon);
                     displayHistoryButton(data.name);
-                    
+                    tasks.push(data.name);
+                    // console.log(tasks);
+                    saveTasks();
                     // console.log(data.weather[0].icon);
                     oneCallWeather(data.coord.lat, data.coord.lon);
                 });
