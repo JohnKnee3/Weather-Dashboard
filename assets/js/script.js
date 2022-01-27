@@ -86,7 +86,7 @@ var getCityWeather = function (city) {
             } else {
                 alert("Error: City " + response.statusText + ". Please enter valid input.");
             }
-
+            
         })
 };
 
@@ -156,7 +156,7 @@ var displayCurrentNameDate = function (name, dateScramble, icon) {
 
     //display icon next to text
     //first make a url
-    var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+    var iconUrl = "https://openweathermap.org/img/w/" + icon + ".png";
 
     //creates an img element to add to the html
     currentIconEl.setAttribute("src", iconUrl);
